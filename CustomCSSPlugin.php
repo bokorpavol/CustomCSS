@@ -2,7 +2,7 @@
 /*
 Plugin Name: Custom CSS
 Description: Add custom CSS to theme
-Version: 0.1
+Version: 0.1.2
 Author: Pavol Bokor
 Author URI: https://www.4enzo.sk
 Licence: GNU DPL v 3.0
