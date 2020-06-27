@@ -17,16 +17,15 @@ i18n_merge($thisfile_customcss) || i18n_merge($thisfile_customcss, 'en_US');
 
 # register plugin
 register_plugin(
-	$thisfile_customcss, 								# ID of plugin, should be filename minus php
+	$thisfile_customcss, 					# ID of plugin, should be filename minus php
 	i18n_r($thisfile_customcss.'/CUSTOMCSS_TITLE'), 	# Title of plugin
-	'0.1', 												# Version of plugin
-	'Pavol Bokor',										# Author of plugin
-	'https://www.4enzo.sk', 							# Author URL
+	'0.1', 							# Version of plugin
+	'Pavol Bokor',						# Author of plugin
+	'https://www.4enzo.sk', 				# Author URL
 	i18n_r($thisfile_customcss.'/CUSTOMCSS_DESC'), 		# Plugin Description
-	'theme', 											# Page type of plugin
-	'customcss_show'  									# Function that displays content
+	'theme', 						# Page type of plugin
+	'customcss_show'  					# Function that displays content
 );
-
 
 # hooks
 add_action('theme-footer','customcss_echo_to_theme'); 
@@ -68,7 +67,7 @@ function customcss_show() {
 		
 		if ($_POST['customcss_content'] != '') {
 			$resp['customcss_content'] = $_POST['customcss_content'];
-		}	
+		}
 		
 		# if there are no errors, save data
 		if (!$error) {
@@ -102,66 +101,18 @@ function customcss_show() {
 			$value = '';
 			if(isset($customcss_data->customcss_content)) $value = $customcss_data->customcss_content;
 		?>
-		
 		<p>
 			<textarea id="lb_customcss_title" name="customcss_content" class="text" type="text"><?php echo $value; ?></textarea>
 		</p>
-
-		<p><input type="submit" id="submit" class="submit" value="<?php i18n('BTN_SAVESETTINGS'); ?>" name="submit" /></p>
+		<p>
+			<input type="submit" id="submit" class="submit" value="<?php i18n('BTN_SAVESETTINGS'); ?>" name="submit" />
+		</p>
 
 	</form>
+<small> <a href="https://github.com/bokorpavol/CustomCSS" target="_blank">Custom CSS on GitHub</a>::<a href="https://www.4enzo.sk/" target="_blank">Author website</a></small>
 <script>
-window.onload = function() {
-	  var foldFunc = CodeMirror.newFoldFunction(CodeMirror.braceRangeFinder);
-	  function keyEvent(cm, e) {
-	    if (e.keyCode == 81 && e.ctrlKey) {
-	      if (e.type == "keydown") {
-	        e.stop();
-	        setTimeout(function() {foldFunc(cm, cm.getCursor().line);}, 50);
-	      }
-	      return true;
-	    }
-	  }
-	  function toggleFullscreenEditing()
-	    {
-	        var editorDiv = $('.CodeMirror-scroll');
-	        if (!editorDiv.hasClass('fullscreen')) {
-	            toggleFullscreenEditing.beforeFullscreen = { height: editorDiv.height(), width: editorDiv.width() }
-	            editorDiv.addClass('fullscreen');
-	            editorDiv.height('100%');
-	            editorDiv.width('100%');
-	            editor.refresh();
-	        }
-	        else {
-	            editorDiv.removeClass('fullscreen');
-	            editorDiv.height(toggleFullscreenEditing.beforeFullscreen.height);
-	            editorDiv.width(toggleFullscreenEditing.beforeFullscreen.width);
-	            editor.refresh();
-	        }
-	    }
-      var editor = CodeMirror.fromTextArea(document.getElementById("lb_customcss_title"), {
-        lineNumbers: true,
-        matchBrackets: true,
-        indentUnit: 4,
-        indentWithTabs: true,
-        enterMode: "keep",
-        mode:"text/css",
-        tabMode: "shift",
-        theme:'default',
-    	onGutterClick: foldFunc,
-    	extraKeys: {"Ctrl-Q": function(cm){foldFunc(cm, cm.getCursor().line);},
-    				"F11": toggleFullscreenEditing, "Esc": toggleFullscreenEditing},
-        onCursorActivity: function() {
-		   	editor.setLineClass(hlLine, null);
-		   	hlLine = editor.setLineClass(editor.getCursor().line, "activeline");
-		}
-      	});
-     var hlLine = editor.setLineClass(0, "activeline");
-    
-     }
-     
+window.onload=function(){var e=CodeMirror.newFoldFunction(CodeMirror.braceRangeFinder);function t(){var e=$(".CodeMirror-scroll");e.hasClass("fullscreen")?(e.removeClass("fullscreen"),e.height(t.beforeFullscreen.height),e.width(t.beforeFullscreen.width),r.refresh()):(t.beforeFullscreen={height:e.height(),width:e.width()},e.addClass("fullscreen"),e.height("100%"),e.width("100%"),r.refresh())}var r=CodeMirror.fromTextArea(document.getElementById("lb_customcss_title"),{lineNumbers:!0,matchBrackets:!0,indentUnit:4,indentWithTabs:!0,enterMode:"keep",mode:"text/css",tabMode:"shift",theme:"default",onGutterClick:e,extraKeys:{"Ctrl-Q":function(t){e(t,t.getCursor().line)},F11:t,Esc:t},onCursorActivity:function(){r.setLineClass(i,null),i=r.setLineClass(r.getCursor().line,"activeline")}}),i=r.setLineClass(0,"activeline")};
 </script>
-	<?php
+<?php
 }
-
 ?>
